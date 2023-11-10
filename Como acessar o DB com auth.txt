@@ -1,0 +1,35 @@
+POST: localhost:8080/login
+
+{
+	"login": "admin",
+	"senha": "123456"
+}
+
+Vai retornar um token. Esse token vai ser usado pra dar get nos cursos cadastrados no banco de dados.
+
+GET: localhost:8080/curso/1
+
+Auth: Bearer Token
+Token: Vai ser o token gerado pelo post
+
+
+Tem que gerar um hash também, que vai ser cadastrado no banco de dados como a senha. Mas pra o acesso a senha vai ser normal.
+Um exemplo de hash de 123456 é:  $2y$10$iwoAGsxc7s8WX2NgemXnVez7opdp6cwdq9Obt.b1BRTNNEiw74r8u
+
+Pode ser gerado nesse site
+https://bcrypt.online/
+
+
+Importante ressaltar que o modelo de banco de dados tem que estar já existente e fiel ao código.
+
+O banco de dados que tá funcionando tem 3 tabelas:
+
+curso (id, nome)
+
+turma(id, nome, curso_id)
+
+usuario(id, login, papel, senha) {
+*Tá preenchida na tabela do banco de dados, respectivamente, os seguintes valores: 
+
+1, admin, ROLE_ADMIN, $2y$10$iwoAGsxc7s8WX2NgemXnVez7opdp6cwdq9Obt.b1BRTNNEiw74r8u
+}
